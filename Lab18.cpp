@@ -6,7 +6,7 @@ using namespace std;
 struct Node {
     double rating;
     string review;
-    Node *next;
+    Node *next = nullptr;
 };
 
 // entering review function prototype
@@ -46,7 +46,6 @@ void enterReview(Node *&reviewNode) {
     cin.ignore();
     cout << "Enter review comments: ";
     getline(cin, reviewNode->review);
-    cout << endl;
 }
 
 // print reviews and calculate and print average
@@ -59,7 +58,7 @@ void printReviews(Node *headNode) {
         Node *current = headNode;
         int count = 0;
         double total = 0.0;
-        while (current) {
+        while (current->next != nullptr) {
             cout << "\t> Review #" << count + 1 << ": " << current->rating << ": " << current->review << endl;
             total += current->rating;
             ++count;
