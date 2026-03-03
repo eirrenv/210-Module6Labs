@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 // review Node struct
@@ -8,11 +9,17 @@ struct Node {
     Node *next;
 };
 
+// entering review function prototype
+void enterReview(Node *&reviewNode);
+
 // insert at head of linked list function prototype
-void insertAtHead(Node *&headNode);
+void insertAtHead(Node *headNode);
 
 // insert at tail of linked list prototype
 void insertAtTail(Node *headNode);
+
+// print reviews prototype
+void printReviews(Node *headNode);
 
 int main() {
     Node *head = nullptr;
@@ -24,7 +31,43 @@ int main() {
     cout << "\t[2] New nodes are added at the tail of the linked list" << endl;
     cout << "\tChoice: ";
     cin >> insertChoice;
-    cout << "You chose: " << insertChoice;
 
     return 0;
+}
+
+void enterReview(Node *&reviewNode) {
+    cout << "Enter review rating 0-5: ";
+    cin >> reviewNode->rating;
+    cin.ignore();
+    cout << endl << "Enter review comments: ";
+    getline(cin, reviewNode->review);
+    cout << endl;
+}
+
+void printReviews(Node *headNode) {
+    cout << "Outputting all reviews:" << endl;
+    if (headNode == nullptr) {
+        cout << "\tNo reviews to output." << endl;
+    }
+    else {
+        Node *current = headNode;
+        int count = 0;
+        double total = 0.0;
+        while (current) {
+            cout << "\t> Review #" << count + 1 << ": " << current->rating << ": " << current->review << endl;
+            total += current->rating;
+            ++count;
+        }
+        cout << "\t> Average: " << total / count << endl;
+
+    }
+}
+
+void insertAtHead(Node *headNode) {
+    Node *newNode = new Node;
+
+}
+
+void insertAtTail(Node *headNode) {
+
 }
