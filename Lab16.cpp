@@ -14,7 +14,8 @@ class Color {
         int blue;
     public: // public getters and setters for red, green, blue privates
         Color() { red = 0; green = 0; blue = 0; }; // default constructor
-        Color(int redVal) { red = redVal; green = 0; blue = 0; }; // partial parameter constructor
+        Color(int redVal) { red = redVal; green = 0; blue = 0; }; // partial red parameter constructor
+        Color(int redVal, int greenVal) { red = redVal; green = greenVal; blue = 0; }; // partial red and green parameter constructor
         Color(int redVal, int greenVal, int blueVal) { red = redVal; green = greenVal; blue = blueVal; }; // full parameter constructor
         void setRed(int r) {
             red = r;
@@ -56,10 +57,12 @@ int main() {
         tmpColor.setBlue(rand() % 255 + 0);
         colorVector.push_back(tmpColor);
     }
-    Color redColor(255); // using partial parameter constructor
+    Color redColor(255); // using partial red parameter constructor
     colorVector.push_back(redColor); 
-    Color partialColor(128, 128, 128); // using full parameter constructor
+    Color partialColor(48, 96);
     colorVector.push_back(partialColor);
+    Color fullColor(128, 128, 128); // using full parameter constructor
+    colorVector.push_back(fullColor);
 
 
     // print code from Sample OOP
