@@ -13,10 +13,10 @@ struct Node {
 void enterReview(Node *&reviewNode);
 
 // insert at head of linked list function prototype
-void insertAtHead(Node *headNode);
+void insertAtHead(Node *&headNode);
 
 // insert at tail of linked list prototype
-void insertAtTail(Node *headNode);
+void insertAtTail(Node *&headNode);
 
 // print reviews prototype
 void printReviews(Node *headNode);
@@ -35,6 +35,7 @@ int main() {
     return 0;
 }
 
+// enter reviews 
 void enterReview(Node *&reviewNode) {
     cout << "Enter review rating 0-5: ";
     cin >> reviewNode->rating;
@@ -44,6 +45,7 @@ void enterReview(Node *&reviewNode) {
     cout << endl;
 }
 
+// print reviews and calculate and print average
 void printReviews(Node *headNode) {
     cout << "Outputting all reviews:" << endl;
     if (headNode == nullptr) {
@@ -63,11 +65,31 @@ void printReviews(Node *headNode) {
     }
 }
 
-void insertAtHead(Node *headNode) {
+// insert node at head
+void insertAtHead(Node *&headNode) {
     Node *newNode = new Node;
-
+    enterReview(newNode);
+    if (headNode == nullptr) {
+        headNode = newNode;
+    }
+    else {
+        newNode->next = headNode;
+        headNode = newNode;
+    }
 }
 
-void insertAtTail(Node *headNode) {
-
+// insert node at tail
+void insertAtTail(Node *&headNode) {
+    Node *newNode = new Node;
+    Node *current = headNode;
+    enterReview(newNode);
+    if (headNode == nullptr) {
+        headNode = newNode;
+    }
+    else {
+        while (current->next) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
 }
