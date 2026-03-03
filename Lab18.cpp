@@ -32,6 +32,10 @@ int main() {
     cout << "\tChoice: ";
     cin >> insertChoice;
 
+    if (insertChoice == 1) {
+        insertAtHead(head);
+        printReviews(head);
+    }
     return 0;
 }
 
@@ -40,7 +44,7 @@ void enterReview(Node *&reviewNode) {
     cout << "Enter review rating 0-5: ";
     cin >> reviewNode->rating;
     cin.ignore();
-    cout << endl << "Enter review comments: ";
+    cout << "Enter review comments: ";
     getline(cin, reviewNode->review);
     cout << endl;
 }
@@ -59,6 +63,7 @@ void printReviews(Node *headNode) {
             cout << "\t> Review #" << count + 1 << ": " << current->rating << ": " << current->review << endl;
             total += current->rating;
             ++count;
+            current = current->next;
         }
         cout << "\t> Average: " << total / count << endl;
 
