@@ -13,7 +13,10 @@ class Color {
         int green;
         int blue;
     public: // public getters and setters for red, green, blue privates
-        void setRed(int r) {
+        Color() { red = 0; green = 0; blue = 0; }; // default constructor
+        Color(int redVal) { red = redVal; green = 0; blue = 0; }; // partial parameter constructor
+        Color(int redVal, int greenVal, int blueVal) { red = redVal; green = greenVal; blue = blueVal; }; // full parameter constructor 
+        int setRed(int r) {
             red = r;
         }
         int getRed() {
@@ -53,6 +56,7 @@ int main() {
         tmpColor.setBlue(rand() % 255 + 0);
         colorVector.push_back(tmpColor);
     }
+    Color
 
     // print code from Sample OOP
     int j = 1;
