@@ -32,8 +32,17 @@ int main() {
     cout << "\tChoice: ";
     cin >> insertChoice;
 
+    char yn; // Y/N check
+
     if (insertChoice == 1) {
         insertAtHead(head);
+        cout << "Enter another review? Y/N: ";
+        cin >> yn;
+        while (yn != 'n' && yn != 'N') {
+            insertAtHead(head);
+            cout << "Enter another review? Y/N: ";
+            cin >> yn;
+        }
         printReviews(head);
     }
     return 0;
