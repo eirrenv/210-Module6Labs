@@ -15,15 +15,38 @@ struct Node {
 class Movie {
     private:
         string movieTitle;
-        Node *rateReview;
+        Node *head;
     public:
         // getters and setters for title, rating and review 
         string getTitle() { return movieTitle; }
         void setTitle(string title) { movieTitle = title; }
-        Node getRating() { return *rateReview; }
+        Node getRating() { return *head; }
         void setRating(double rating, string review) { 
-            rateReview->rating = rating;
-            rateReview->review = review;
+            head->rating = rating;
+            head->review = review;
+        }
+        
+        // insert review in Movie object
+        void addReview(double rating, string review) {
+            Node *newNode = new Node;
+            newNode->rating = rating;
+            newNode->review = review;
+            newNode->next = head;
+            head = newNode;
+        }
+
+        // print reviews in Movie object
+        void printReviews() {
+            Node *current = head;
+            int count = 0;
+            double total = 0.0;
+            while (current != nullptr) {
+                cout << "\t> Review #" << count + 1 << ": " << current->rating << ": " << current->review << endl;
+                total += current->rating;
+                ++count;
+                current = current->next;
+            }
+            cout << "\t> Average: " << total / count << endl;
         }
 };
 
@@ -54,54 +77,15 @@ int main() {
             getline(fin, review);
             Movie tmp;
             tmp.setTitle(title);
+            for (int i = 0; i < NUM_REVIEWS; ++i) {
+                tmp.setRating(rating, review);
+            }
+
 
         }
         fin.close();
     }
     else {
         cout << "Input file not found.\n";
-    }
-    // insertAtHead(head);
-    // printReviews(head);
-    
-}
-
-// enter reviews 
-void enterReview(Movie tmpMovie, double rating, string review) {
-    tmpMovie.setRating(rating, review);
-    
-}
-
-// print reviews and calculate and print average
-void printReviews(Node *headNode) {
-    cout << "Outputting all reviews:" << endl;
-    if (headNode == nullptr) {
-        cout << "\tNo reviews to output." << endl;
-    }
-    else {
-        Node *current = headNode;
-        int count = 0;
-        double total = 0.0;
-        while (current != nullptr) {
-            cout << "\t> Review #" << count + 1 << ": " << current->rating << ": " << current->review << endl;
-            total += current->rating;
-            ++count;
-            current = current->next;
-        }
-        cout << "\t> Average: " << total / count << endl;
-
-    }
-}
-
-// insert node at head
-void insertAtHead(Node *&headNode) {
-    Node *newNode = new Node;
-    enterReview(newNode);
-    if (headNode == nullptr) {
-        headNode = newNode;
-    }
-    else {
-        newNode->next = headNode;
-        headNode = newNode;
     }
 }
