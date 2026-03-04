@@ -35,8 +35,16 @@ int main() {
     char yn = 'y'; // Y/N check
 
     if (insertChoice == 1) {
-        while (yn != 'n' && yn != 'N') {
+        while (tolower(yn) != 'n') {
             insertAtHead(head);
+            cout << "Enter another review? Y/N: ";
+            cin >> yn;
+        }
+        printReviews(head);
+    }
+    else if (insertChoice == 2) {
+        while (yn != 'n' && yn != 'N') {
+            insertAtTail(head);
             cout << "Enter another review? Y/N: ";
             cin >> yn;
         }
@@ -91,6 +99,7 @@ void insertAtHead(Node *&headNode) {
 // insert node at tail
 void insertAtTail(Node *&headNode) {
     Node *newNode = new Node;
+    newNode->next = nullptr;
     Node *current = headNode;
     enterReview(newNode);
     if (headNode == nullptr) {
