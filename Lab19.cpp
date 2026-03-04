@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 // review Node struct
@@ -9,14 +10,27 @@ struct Node {
     Node *next = nullptr;
 };
 
+// Movie class
+class Movie {
+    private:
+        string movieTitle;
+        Node *rateReview;
+    public:
+        // getters and setters for title, rating and review 
+        string getTitle() { return movieTitle; }
+        void setTitle(string title) { movieTitle = title; }
+        Node getRating() { return *rateReview; }
+        void setRating(Node *reviewToSet) { 
+            rateReview->rating = reviewToSet->rating; 
+            rateReview->review = reviewToSet->review; 
+        }
+}
+
 // entering review function prototype
 void enterReview(Node *&reviewNode);
 
 // insert at head of linked list function prototype
 void insertAtHead(Node *&headNode);
-
-// insert at tail of linked list prototype
-void insertAtTail(Node *&headNode);
 
 // print reviews prototype
 void printReviews(Node *headNode);
@@ -24,33 +38,9 @@ void printReviews(Node *headNode);
 int main() {
     Node *head = nullptr;
 
-    int insertChoice; // int to contain LL method
-
-    cout << "Which linked list method should we use?" << endl;
-    cout << "\t[1] New nodes are added at the head of the linked list" << endl;
-    cout << "\t[2] New nodes are added at the tail of the linked list" << endl;
-    cout << "\tChoice: ";
-    cin >> insertChoice;
-
-    char yn = 'y'; // Y/N check
-
-    if (insertChoice == 1) {
-        while (tolower(yn) != 'n') {
-            insertAtHead(head);
-            cout << "Enter another review? Y/N: ";
-            cin >> yn;
-        }
-        printReviews(head);
-    }
-    else if (insertChoice == 2) {
-        while (yn != 'n' && yn != 'N') {
-            insertAtTail(head);
-            cout << "Enter another review? Y/N: ";
-            cin >> yn;
-        }
-        printReviews(head);
-    }
-    return 0;
+    insertAtHead(head);
+    printReviews(head);
+    
 }
 
 // enter reviews 
@@ -93,22 +83,5 @@ void insertAtHead(Node *&headNode) {
     else {
         newNode->next = headNode;
         headNode = newNode;
-    }
-}
-
-// insert node at tail
-void insertAtTail(Node *&headNode) {
-    Node *newNode = new Node;
-    newNode->next = nullptr;
-    Node *current = headNode;
-    enterReview(newNode);
-    if (headNode == nullptr) {
-        headNode = newNode;
-    }
-    else {
-        while (current->next) {
-            current = current->next;
-        }
-        current->next = newNode;
     }
 }
