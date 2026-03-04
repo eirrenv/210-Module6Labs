@@ -21,11 +21,13 @@ class Movie {
         string getTitle() { return movieTitle; }
         void setTitle(string title) { movieTitle = title; }
         Node getRating() { return *rateReview; }
-        void setRating(Node *reviewToSet) { 
-            rateReview->rating = reviewToSet->rating; 
-            rateReview->review = reviewToSet->review; 
+        void setRating(double rating, string review) { 
+            rateReview->rating = rating;
+            rateReview->review = review;
         }
 };
+
+const int NUM_REVIEWS = 3; // number of reviews per movie
 
 // entering review function prototype
 void enterReview(Node *&reviewNode);
@@ -51,11 +53,13 @@ int main() {
             fin.ignore();
             getline(fin, review);
             Movie tmp;
-            Node *tmpNode = new Node;
             tmp.setTitle(title);
 
         }
         fin.close();
+    }
+    else {
+        cout << "Input file not found.\n";
     }
     // insertAtHead(head);
     // printReviews(head);
@@ -63,12 +67,9 @@ int main() {
 }
 
 // enter reviews 
-void enterReview(Node *&reviewNode) {
-    cout << "Enter review rating 0-5: ";
-    cin >> reviewNode->rating;
-    cin.ignore();
-    cout << "Enter review comments: ";
-    getline(cin, reviewNode->review);
+void enterReview(Movie tmpMovie, double rating, string review) {
+    tmpMovie.setRating(rating, review);
+    
 }
 
 // print reviews and calculate and print average
