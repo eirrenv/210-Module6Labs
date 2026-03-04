@@ -17,14 +17,13 @@ class Movie {
         string movieTitle;
         Node *head;
     public:
+        Movie() {
+            head = nullptr;
+        }
         // getters and setters for title, rating and review 
         string getTitle() { return movieTitle; }
         void setTitle(string title) { movieTitle = title; }
         Node getRating() { return *head; }
-        void setRating(double rating, string review) { 
-            head->rating = rating;
-            head->review = review;
-        }
         
         // insert review in Movie object
         void addReview(double rating, string review) {
@@ -52,18 +51,10 @@ class Movie {
 
 const int NUM_REVIEWS = 3; // number of reviews per movie
 
-// entering review function prototype
-void enterReview(Node *&reviewNode);
-
-// insert at head of linked list function prototype
-void insertAtHead(Node *&headNode);
-
-// print reviews prototype
-void printReviews(Node *headNode);
 
 int main() {
     Node *head = nullptr;
-    vector<Movie> movieVector; // vector containing Movie objects
+    // vector<Movie> movieVector; // vector containing Movie objects, will add later
 
     string title; // holds temp title
     double rating; // holds temp rating
@@ -72,15 +63,15 @@ int main() {
     ifstream fin("text.txt");
     if (fin.good()) {
         while (getline(fin, title)) { // capture data from input file
-            fin >> rating;
-            fin.ignore();
-            getline(fin, review);
             Movie tmp;
             tmp.setTitle(title);
             for (int i = 0; i < NUM_REVIEWS; ++i) {
-                tmp.setRating(rating, review);
+                fin >> rating;
+                fin.ignore();
+                getline(fin, review);
+                tmp.addReview(rating, review);
             }
-
+            tmp.printReviews();
 
         }
         fin.close();
