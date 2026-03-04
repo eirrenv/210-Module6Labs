@@ -32,12 +32,9 @@ int main() {
     cout << "\tChoice: ";
     cin >> insertChoice;
 
-    char yn; // Y/N check
+    char yn = 'y'; // Y/N check
 
     if (insertChoice == 1) {
-        insertAtHead(head);
-        cout << "Enter another review? Y/N: ";
-        cin >> yn;
         while (yn != 'n' && yn != 'N') {
             insertAtHead(head);
             cout << "Enter another review? Y/N: ";
@@ -67,7 +64,7 @@ void printReviews(Node *headNode) {
         Node *current = headNode;
         int count = 0;
         double total = 0.0;
-        while (current->next != nullptr) {
+        while (current != nullptr) {
             cout << "\t> Review #" << count + 1 << ": " << current->rating << ": " << current->review << endl;
             total += current->rating;
             ++count;
