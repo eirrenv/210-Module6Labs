@@ -39,6 +39,7 @@ class Movie {
             Node *current = head;
             int count = 0;
             double total = 0.0;
+            cout << "Movie Title: " << movieTitle << endl;
             while (current != nullptr) {
                 cout << "\t> Review #" << count + 1 << ": " << current->rating << ": " << current->review << endl;
                 total += current->rating;
@@ -54,7 +55,7 @@ const int NUM_REVIEWS = 3; // number of reviews per movie
 
 int main() {
     Node *head = nullptr;
-    // vector<Movie> movieVector; // vector containing Movie objects, will add later
+    vector<Movie> movieVector; // vector containing Movie objects
 
     string title; // holds temp title
     double rating; // holds temp rating
@@ -63,20 +64,27 @@ int main() {
     ifstream fin("text.txt");
     if (fin.good()) {
         while (getline(fin, title)) { // capture data from input file
-            Movie tmp;
-            tmp.setTitle(title);
+
+            Movie tmp; // temporary Movie object to store input data
+
+            tmp.setTitle(title); // set temporary title
+
+            // for loop to contain ratings and reviews
             for (int i = 0; i < NUM_REVIEWS; ++i) {
                 fin >> rating;
                 fin.ignore();
                 getline(fin, review);
                 tmp.addReview(rating, review);
             }
-            tmp.printReviews();
-
+            movieVector.push_back(tmp); // add Movie object to vector
         }
         fin.close();
     }
     else {
         cout << "Input file not found.\n";
+    }
+    // print Movie objects in vector
+    for (int i = 0; i < movieVector.size(); ++i) {
+        movieVector.at(i).printReviews();
     }
 }
