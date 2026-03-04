@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 // review Node struct
@@ -24,7 +25,7 @@ class Movie {
             rateReview->rating = reviewToSet->rating; 
             rateReview->review = reviewToSet->review; 
         }
-}
+};
 
 // entering review function prototype
 void enterReview(Node *&reviewNode);
@@ -37,9 +38,27 @@ void printReviews(Node *headNode);
 
 int main() {
     Node *head = nullptr;
+    vector<Movie> movieVector; // vector containing Movie objects
 
-    insertAtHead(head);
-    printReviews(head);
+    string title; // holds temp title
+    double rating; // holds temp rating
+    string review; // holds temp review
+
+    ifstream fin("text.txt");
+    if (fin.good()) {
+        while (getline(fin, title)) { // capture data from input file
+            fin >> rating;
+            fin.ignore();
+            getline(fin, review);
+            Movie tmp;
+            Node *tmpNode = new Node;
+            tmp.setTitle(title);
+
+        }
+        fin.close();
+    }
+    // insertAtHead(head);
+    // printReviews(head);
     
 }
 
